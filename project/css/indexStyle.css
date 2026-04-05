@@ -4,4 +4,31 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    overflow: hidden;
+  
+}
+
+.nav-grid {
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto repeat(3, 80px);
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    left: 33vw;
+    top: 22vh;
+}
+.nav-grid a img {
+    width: 10rem;
+    height: auto;
+}
+#headlineLogo img {
+    width: 30rem;
+    position: absolute;
+    top: 50px;
+    left: 32vw;
 }
