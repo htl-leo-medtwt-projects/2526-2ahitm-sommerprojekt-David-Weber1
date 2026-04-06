@@ -1,11 +1,18 @@
-body{
+@font-face {
+    font-family: "VCR OSD Mono";
+    src: url("../font/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf") format("truetype");
+    font-display: swap;
+}
+
+body {
     background-image: url(../img/Backgrounds/startBgImgForest.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     overflow: hidden;
-  
+    font-family: "VCR OSD Mono", monospace;
+
 }
 
 .nav-grid {
@@ -17,18 +24,35 @@ body{
     margin: 0;
     height: 100vh;
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
     left: 33vw;
     top: 22vh;
 }
+
 .nav-grid a img {
     width: 10rem;
     height: auto;
 }
+
 #headlineLogo img {
     width: 30rem;
     position: absolute;
     top: 50px;
     left: 32vw;
 }
+
+a {
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+a:hover {
+    transform: translateY(-4px) scale(1.03);
+    filter: brightness(1.08);
+}
+/*von ai*/
+a:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+
