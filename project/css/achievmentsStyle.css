@@ -12,8 +12,30 @@ body {
     background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
-    overflow: auto;
+    overflow: hidden;
     font-family: "VCR OSD Mono", monospace;
+}
+.backBtn {
+	position: fixed;
+	top: 16px;
+	left: 16px;
+	z-index: 20;
+	display: inline-block;
+	transition: 0.2s;
+}
+
+.backBtn img {
+	width: clamp(42px, 5vw, 64px);
+	display: block;
+}
+
+.backBtn:hover {
+	transform: translateY(-2px) scale(1.04);
+	filter: brightness(1.08);
+}
+
+.backBtn:active {
+	transform: translateY(1px) scale(0.97);
 }
 
 .achievements-grid {
