@@ -42,6 +42,25 @@ body {
     left: 32vw;
 }
 
+
+#audioBox{
+    background-image: url(../img/Backgrounds/woodwall.jpg);
+    border: black 2px solid;
+    width: 20%;
+    padding: 0.5rem;
+    
+
+}
+.BtnDiv{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+}
+
+.audioBtn{
+    cursor: pointer;
+}
+
 a {
     transition: transform 0.2s ease, filter 0.2s ease;
 }
