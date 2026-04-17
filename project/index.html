@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./css/indexStyle.css">
     <script src="./js/indexScript.js" defer></script>
     <link rel="icon" href="./img/LogoImg.png" type="image/png">
+    <link rel="stylesheet" href="./css/tutorialStyle.css">
+    
 
 </head>
 
@@ -31,7 +33,7 @@
             <img src="./img/Buttons/startGameBtn.png" alt="STARTGAME">
         </a>
 
-        <a href="./unterseiten/tutorial.html">
+        <a href="#" onclick="openTutorial(); return false;">
             <img src="./img/Buttons/questionMarkBtn.png" alt="TUTORIAL">
         </a>
 
@@ -39,6 +41,35 @@
             <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="ACHIEVMENTS">
         </a>
     </nav>
+
+
+
+    <div id="tutorialContainer">
+
+        <div onclick="closeTutorial()" id="backBtn" class="backBtn">
+            <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="GO BACK">
+        </div>
+
+        <div class="boardSection">
+            <div id="bigImg">
+                <img src="./img/Buttons/woodboard.png" alt="WOODBOARD">
+                <p>Hier wird dir die Geschichte erklärt und auf den Btns unten kannst du dann eine Entscheidung treffen
+                </p>
+            </div>
+
+            <div class="smallRow">
+                <div class="smallImg">
+                    <img src="./img/Buttons/woodboard.png" alt="WOODBOARD">
+                    <p>Entscheidung 1:</p>
+                </div>
+                <div class="smallImg">
+                    <img src="./img/Buttons/woodboard.png" alt="WOODBOARD">
+                    <p>Entscheidung 2:</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 </body>

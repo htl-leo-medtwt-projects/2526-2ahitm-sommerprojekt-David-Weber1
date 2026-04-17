@@ -7,15 +7,16 @@
 	box-sizing: border-box; 
 }
 
-body {
-	margin: 0;
-	min-height: 100vh;
-	display: flex;
+#tutorialContainer {
+	position: fixed;
+	inset: 0;
+	display: none;
 	justify-content: center;
 	align-items: center;
 	background: url(../img/Backgrounds/hellerForestGreenBg.jpg) center / cover no-repeat fixed;
-	overflow: hidden;
+	overflow: auto;
 	font-family: "VCR OSD Mono", monospace;
+	z-index: 1000;
 }
 
 .backBtn {
@@ -80,8 +81,8 @@ body {
 
 #bigImg p {
 	width: 78%;
-	font-size: clamp(0.95rem, 1.6vw, 1.25rem);
 	line-height: 1.35;
+	font-size: 1.5rem;
 }
 
 .smallImg {
