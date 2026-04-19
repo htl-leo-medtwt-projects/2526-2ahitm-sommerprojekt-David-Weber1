@@ -88,3 +88,4 @@ function closeLevelPick() {
         levelPickContainer.style.display = 'none';
     }
 }
+

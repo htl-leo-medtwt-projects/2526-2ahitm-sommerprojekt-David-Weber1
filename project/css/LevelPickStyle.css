@@ -99,3 +99,90 @@
   height: 100%;
   display: block;
 }
+
+#level1Container {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: url("../img/Backgrounds/volcano.jpg") center / cover no-repeat fixed;
+  overflow: auto;
+  font-family: "VCR OSD Mono";
+  z-index: 1100;
+}
+
+.level1BoardSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  width: 100%;
+  padding: 20px;
+}
+
+.level1BigImg,
+.level1SmallImg {
+  position: relative;
+}
+
+.level1BigImg {
+  width: min(82vw, 840px);
+}
+
+.level1BigImg img,
+.level1SmallImg img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.level1BigImg p,
+.level1SmallImg p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+  color: #1f1f1f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+.level1BigImg p {
+  width: 78%;
+  line-height: 1.35;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+}
+
+.level1SmallImg {
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.level1SmallImg img {
+  width: min(34vw, 320px);
+}
+
+.level1SmallImg p {
+  width: 80%;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+.level1SmallRow {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.level1SmallImg:hover {
+  transform: translateY(-4px) scale(1.03);
+  filter: brightness(1.08);
+}
+
+.level1SmallImg:active {
+  transform: translateY(1px) scale(0.98);
+}

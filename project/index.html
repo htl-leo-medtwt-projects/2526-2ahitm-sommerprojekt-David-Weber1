@@ -7,6 +7,7 @@
     <title>Start</title>
     <link rel="stylesheet" href="./css/indexStyle.css">
     <script src="./js/indexScript.js" defer></script>
+    <script src="./js/volcanoScript.js" defer></script>
     <link rel="icon" href="./img/LogoImg.png" type="image/png">
     <link rel="stylesheet" href="./css/tutorialStyle.css">
     <link rel="stylesheet" href="./css/achievmentsStyle.css">
@@ -132,28 +133,28 @@
         <h1 class="levelPickTitle">Level Pick</h1>
 
         <div class="container">
-            <a href="./unterseiten/mainGame.html">
+            <a onclick="openLevel1(); return false;" href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/volcano.jpg" alt="Level 1">
                     <div class="label">Level 1</div>
                 </div>
             </a>
 
-            <a href="./unterseiten/mainGame.html">
+            <a href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/castleBg.jpg" alt="Level 2">
                     <div class="label">Level 2</div>
                 </div>
             </a>
 
-            <a href="./unterseiten/mainGame.html">
+            <a href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/darkForestBg.jpg" alt="Level 3">
                     <div class="label">Level 3</div>
                 </div>
             </a>
 
-            <a href="./unterseiten/mainGame.html">
+            <a href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/pixelHouseBg.jpg" alt="Level 4">
                     <div class="label">Level 4</div>
@@ -166,9 +167,37 @@
         </div>
     </div>
 
+    <div id="level1Container">
+        <div onclick="closeLevel1()" class="backBtn">
+            <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="GO BACK">
+        </div>
+
+        <div id="level1StorySection" class="level1BoardSection story-section">
+            <div id="level1StoryBoard" class="level1BigImg story-board js-story-board">
+                <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                <p id="level1StoryText" class="story-text js-story-text">Willkommen im Vulkan Level. Triff deine Entscheidung und bestimme deinen Weg.</p>
+            </div>
+
+            <div id="level1DecisionRow" class="level1SmallRow decision-row">
+                <div id="level1Decision1" class="level1SmallImg level1DecisionBtn story-decision js-story-decision" data-choice="1">
+                    <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                    <p id="level1Decision1Text" class="decision-text js-decision-text">Entscheidung 1</p>
+                </div>
+                <div id="level1Decision2" class="level1SmallImg level1DecisionBtn story-decision js-story-decision" data-choice="2">
+                    <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                    <p id="level1Decision2Text" class="decision-text js-decision-text">Entscheidung 2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button id="muteAudioBtn" type="button" onclick="toggleAudio()" aria-label="Mute or unmute audio">
         <img src="./img/Buttons/muteAudio.png" alt="Mute Audio">
     </button>
+
+
+
+
 
 
 
