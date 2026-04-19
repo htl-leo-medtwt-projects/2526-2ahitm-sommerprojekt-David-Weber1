@@ -7,10 +7,12 @@
   box-sizing: border-box;
 }
 
-body {
+#levelPickContainer {
+  position: fixed;
+  inset: 0;
   margin: 0;
   min-height: 100vh;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -19,12 +21,13 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow: hidden;
+  overflow: auto;
   color: white;
   font-family: "VCR OSD Mono";
+  z-index: 1000;
 }
 
-h1 {
+.levelPickTitle {
   margin: 0 0 24px;
   font-weight: 400;
 }

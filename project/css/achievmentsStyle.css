@@ -4,7 +4,12 @@
     font-display: swap;
 }
 
-body {
+#achievementsContainer {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
     background-image: url(../img/Backgrounds/woodwall.jpg);
     background-position: top;
     background-repeat: repeat;
@@ -12,8 +17,9 @@ body {
     background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: auto;
     font-family: "VCR OSD Mono", monospace;
+    z-index: 1000;
 }
 .backBtn {
 	position: fixed;

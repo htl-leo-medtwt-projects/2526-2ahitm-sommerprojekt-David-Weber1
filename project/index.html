@@ -9,6 +9,8 @@
     <script src="./js/indexScript.js" defer></script>
     <link rel="icon" href="./img/LogoImg.png" type="image/png">
     <link rel="stylesheet" href="./css/tutorialStyle.css">
+    <link rel="stylesheet" href="./css/achievmentsStyle.css">
+    <link rel="stylesheet" href="./css/LevelPickStyle.css">
     
 
 </head>
@@ -19,7 +21,7 @@
         <h1>Audio Erlebnis einschalten?</h1>
         <div id="btnDiv">
             <div onclick="startAudio()" class="audioBtn">Sicher</div>
-            <div class="audioBtn">Lieber nicht</div>
+            <div onclick="declineAudio()" class="audioBtn">Lieber nicht</div>
         </div>
     </div>
 
@@ -29,7 +31,7 @@
     <nav class="nav-grid">
 
 
-        <a href="./unterseiten/levelPick.html">
+        <a href="#" onclick="openLevelPick(); return false;">
             <img src="./img/Buttons/startGameBtn.png" alt="STARTGAME">
         </a>
 
@@ -37,7 +39,7 @@
             <img src="./img/Buttons/questionMarkBtn.png" alt="TUTORIAL">
         </a>
 
-        <a href="./unterseiten/achievments.html">
+        <a href="#" onclick="openAchievments(); return false;">
             <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="ACHIEVMENTS">
         </a>
     </nav>
@@ -69,6 +71,104 @@
             </div>
         </div>
     </div>
+
+    <div id="achievementsContainer">
+        <div onclick="closeAchievments()" class="backBtn">
+            <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="GO BACK">
+        </div>
+
+        <main class="achievements-grid">
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 1</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 2</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 3</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 4</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 5</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 6</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 7</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 8</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 9</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 10</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 11</figcaption>
+            </figure>
+            <figure class="achievment">
+                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
+                <figcaption>Achievement 12</figcaption>
+            </figure>
+        </main>
+    </div>
+    <div id="levelPickContainer">
+        <h1 class="levelPickTitle">Level Pick</h1>
+
+        <div class="container">
+            <a href="./unterseiten/mainGame.html">
+                <div class="card">
+                    <img src="./img/Backgrounds/volcano.jpg" alt="Level 1">
+                    <div class="label">Level 1</div>
+                </div>
+            </a>
+
+            <a href="./unterseiten/mainGame.html">
+                <div class="card">
+                    <img src="./img/Backgrounds/castleBg.jpg" alt="Level 2">
+                    <div class="label">Level 2</div>
+                </div>
+            </a>
+
+            <a href="./unterseiten/mainGame.html">
+                <div class="card">
+                    <img src="./img/Backgrounds/darkForestBg.jpg" alt="Level 3">
+                    <div class="label">Level 3</div>
+                </div>
+            </a>
+
+            <a href="./unterseiten/mainGame.html">
+                <div class="card">
+                    <img src="./img/Backgrounds/pixelHouseBg.jpg" alt="Level 4">
+                    <div class="label">Level 4</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="close-btn" onclick="closeLevelPick()">
+            <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="Close">
+        </div>
+    </div>
+
+    <button id="muteAudioBtn" type="button" onclick="toggleAudio()" aria-label="Mute or unmute audio">
+        <img src="./img/Buttons/muteAudio.png" alt="Mute Audio">
+    </button>
 
 
 
