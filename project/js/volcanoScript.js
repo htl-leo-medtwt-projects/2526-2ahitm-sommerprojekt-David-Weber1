@@ -5,8 +5,9 @@ const level1Decision2 = document.getElementById('level1Decision2');
 const level1Decision1Text = document.getElementById('level1Decision1Text');
 const level1Decision2Text = document.getElementById('level1Decision2Text');
 const level1StoryBoard = document.getElementById('level1StoryBoard');
+const level1StoryBoardImage = level1StoryBoard ? level1StoryBoard.querySelector('img') : null;
 
-const volcanoStory = {
+let volcanoStory = {
     title: 'Der Fluch des Vulkans',
     start: 'intro',
     nodes: {
@@ -105,3 +106,266 @@ const volcanoStory = {
         }
     }
 };
+
+let hasLoadedVolcanoStoryFromJson = false;
+
+function isValidVolcanoStory(data) {
+    if (!data || typeof data !== 'object') {
+        return false;
+    }
+
+    if (typeof data.start !== 'string') {
+        return false;
+    }
+
+    if (!data.nodes || typeof data.nodes !== 'object') {
+        return false;
+    }
+
+    return true;
+}
+
+async function loadVolcanoStoryFromJson() {
+    if (hasLoadedVolcanoStoryFromJson) {
+        return true;
+    }
+
+    try {
+        const response = await fetch('./data/volcano.json', { cache: 'no-cache' });
+
+        if (!response.ok) {
+            throw new Error('HTTP ' + response.status);
+        }
+
+        const jsonStory = await response.json();
+
+        if (!isValidVolcanoStory(jsonStory)) {
+            throw new Error('Invalid volcano story JSON structure.');
+        }
+
+        volcanoStory = jsonStory;
+        hasLoadedVolcanoStoryFromJson = true;
+        return true;
+    } catch (error) {
+        console.error('Could not load ./data/volcano.json. Using built-in fallback story.', error);
+        return false;
+    }
+}
+
+
+// Speichert den aktuellen Story-Abschnitt
+let currentLevel1NodeId = null;
+
+
+// Holt einen Node (Story-Teil)
+function getLevel1Node(nodeId) {
+    if (volcanoStory.nodes) {
+        return volcanoStory.nodes[nodeId];
+    } else {
+        return null;
+    }
+}
+
+
+// Zeigt einen Node an
+function renderLevel1Node(nodeId) {
+    const node = getLevel1Node(nodeId);
+
+    // Wenn kein Node gefunden → abbrechen
+    if (!node) {
+        return;
+    }
+
+    currentLevel1NodeId = nodeId;
+
+    // TEXT anzeigen
+    if (level1StoryText) {
+        if (node.text) {
+            level1StoryText.textContent = node.text;
+        } else {
+            level1StoryText.textContent = '';
+        }
+    }
+
+    // BILD setzen
+    if (level1StoryBoardImage) {
+        if (node.ending) {
+            level1StoryBoardImage.src = './img/You-Died-PNG-Photos.png';
+            level1StoryBoardImage.alt = 'You Died';
+        } else {
+            level1StoryBoardImage.src = './img/Buttons/stone_board-removebg-preview.png';
+            level1StoryBoardImage.alt = 'STONEBOARD';
+        }
+    }
+
+    // Entscheidungen vorbereiten
+    let choices;
+    if (Array.isArray(node.choices)) {
+        choices = node.choices;
+    } else {
+        choices = [];
+    }
+
+    let firstChoice;
+    if (choices[0]) {
+        firstChoice = choices[0];
+    } else {
+        firstChoice = null;
+    }
+
+    let secondChoice;
+    if (choices[1]) {
+        secondChoice = choices[1];
+    } else {
+        secondChoice = null;
+    }
+
+    // BUTTON 1
+    if (level1Decision1) {
+        if (firstChoice) {
+            level1Decision1.style.display = 'inline-block';
+            level1Decision1.dataset.next = firstChoice.next;
+        } else {
+            level1Decision1.style.display = 'none';
+            level1Decision1.dataset.next = '';
+        }
+    }
+
+    if (level1Decision1Text) {
+        if (firstChoice) {
+            level1Decision1Text.textContent = firstChoice.text;
+        } else {
+            level1Decision1Text.textContent = '';
+        }
+    }
+
+    // BUTTON 2
+    if (level1Decision2) {
+        if (secondChoice) {
+            level1Decision2.style.display = 'inline-block';
+            level1Decision2.dataset.next = secondChoice.next;
+        } else {
+            level1Decision2.style.display = 'none';
+            level1Decision2.dataset.next = '';
+        }
+    }
+
+    if (level1Decision2Text) {
+        if (secondChoice) {
+            level1Decision2Text.textContent = secondChoice.text;
+        } else {
+            level1Decision2Text.textContent = '';
+        }
+    }
+
+    // Wenn Ende erreicht
+    if (node.ending) {
+
+        if (level1Decision1Text) {
+            level1Decision1Text.textContent = 'Nochmal spielen';
+        }
+
+        if (level1Decision1) {
+            level1Decision1.style.display = 'inline-block';
+            level1Decision1.dataset.next = volcanoStory.start;
+        }
+
+        if (level1Decision2) {
+            level1Decision2.style.display = 'none';
+            level1Decision2.dataset.next = '';
+        }
+    }
+}
+
+
+// Story starten
+function startLevel1Story() {
+    renderLevel1Node(volcanoStory.start);
+}
+
+
+// Nächsten Schritt gehen
+function advanceLevel1Story(choiceIndex) {
+    const node = getLevel1Node(currentLevel1NodeId);
+
+    if (!node) {
+        return;
+    }
+
+    if (!Array.isArray(node.choices)) {
+        return;
+    }
+
+    const choice = node.choices[choiceIndex];
+
+    if (!choice) {
+        return;
+    }
+
+    if (!choice.next) {
+        return;
+    }
+
+    renderLevel1Node(choice.next);
+}
+
+
+// BUTTON 1 Klick
+if (level1Decision1) {
+    level1Decision1.addEventListener('click', function () {
+
+        if (currentLevel1NodeId) {
+
+            const currentNode = getLevel1Node(currentLevel1NodeId);
+
+            if (currentNode) {
+                if (currentNode.ending) {
+                    startLevel1Story();
+                    return;
+                }
+            }
+        }
+
+        advanceLevel1Story(0);
+    });
+}
+
+
+// BUTTON 2 Klick
+if (level1Decision2) {
+    level1Decision2.addEventListener('click', function () {
+        advanceLevel1Story(1);
+    });
+}
+
+
+// Am Anfang verstecken
+if (level1Container) {
+    level1Container.style.display = 'none';
+}
+
+
+// Level öffnen
+async function openLevel1() {
+
+    if (levelPickContainer) {
+        levelPickContainer.style.display = 'none';
+    }
+
+    if (level1Container) {
+        level1Container.style.display = 'flex';
+    }
+
+    await loadVolcanoStoryFromJson();
+    startLevel1Story();
+}
+
+
+// Level schließen
+function closeLevel1() {
+    if (level1Container) {
+        level1Container.style.display = 'none';
+    }
+}
+
+loadVolcanoStoryFromJson();
