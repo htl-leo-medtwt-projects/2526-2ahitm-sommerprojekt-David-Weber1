@@ -4,368 +4,133 @@ const level1Decision1 = document.getElementById('level1Decision1');
 const level1Decision2 = document.getElementById('level1Decision2');
 const level1Decision1Text = document.getElementById('level1Decision1Text');
 const level1Decision2Text = document.getElementById('level1Decision2Text');
-const level1StoryBoard = document.getElementById('level1StoryBoard');
-const level1StoryBoardImage = level1StoryBoard ? level1StoryBoard.querySelector('img') : null;
+
+let level1StoryBoard = document.getElementById('level1StoryBoard');
+let level1StoryBoardImage = null;
+
+if (level1StoryBoard) {
+    level1StoryBoardImage = level1StoryBoard.querySelector('img');
+}
 
 let volcanoStory = {
-    title: 'Der Fluch des Vulkans',
-    start: 'intro',
+    start: "intro",
     nodes: {
         intro: {
-            text: 'Du bist ein Abenteurer, der einen mysteriösen Vulkan erforschen will. Einheimische warnen dich vor einem Fluch. Rauch steigt aus dem Krater auf.',
+            text: "Story konnte nicht geladen werden.",
             choices: [
-                { text: 'Den Vulkan besteigen', next: 'aufstieg' },
-                { text: 'Im Dorf nach Informationen suchen', next: 'dorf' }
+                { text: "Nochmal versuchen", next: "intro" }
             ]
-        },
-        dorf: {
-            text: "Ein alter Mann erzählt dir von einem Geist im Vulkan. 'Nimm diese Amulette', sagt er.",
-            choices: [
-                { text: 'Amulett annehmen und zum Vulkan gehen', next: 'aufstieg_mit_amulett' },
-                { text: 'Ignorieren und direkt gehen', next: 'aufstieg' }
-            ]
-        },
-        aufstieg: {
-            text: 'Der Aufstieg ist gefährlich. Der Boden bebt leicht.',
-            choices: [
-                { text: 'Schnell weiterlaufen', next: 'sturz' },
-                { text: 'Vorsichtig gehen', next: 'hoehle' }
-            ]
-        },
-        aufstieg_mit_amulett: {
-            text: 'Mit dem Amulett fühlst du dich sicherer. Der Boden bebt.',
-            choices: [
-                { text: 'Weitergehen', next: 'hoehle_mit_amulett' }
-            ]
-        },
-        sturz: {
-            text: 'Du rennst zu schnell, stolperst und fällst in eine Felsspalte.',
-            ending: 'Du bist gestorben.'
-        },
-        hoehle: {
-            text: 'Du findest eine Höhle mit zwei Wegen.',
-            choices: [
-                { text: 'Linker Tunnel', next: 'lavafluss' },
-                { text: 'Rechter Tunnel', next: 'geist' }
-            ]
-        },
-        hoehle_mit_amulett: {
-            text: 'Die Höhle scheint ruhiger zu sein. Das Amulett leuchtet leicht.',
-            choices: [
-                { text: 'Dem Licht folgen', next: 'schatz' },
-                { text: 'In die Dunkelheit gehen', next: 'geist' }
-            ]
-        },
-        lavafluss: {
-            text: 'Du erreichst einen Lavastrom, der plötzlich stärker wird.',
-            choices: [
-                { text: 'Springen', next: 'lava_tot' },
-                { text: 'Umkehren', next: 'geist' }
-            ]
-        },
-        lava_tot: {
-            text: 'Du versuchst zu springen, aber die Hitze überwältigt dich.',
-            ending: 'Du bist in der Lava verbrannt.'
-        },
-        geist: {
-            text: 'Ein feuriger Geist erscheint vor dir.',
-            choices: [
-                { text: 'Kämpfen', next: 'kampf' },
-                { text: 'Fliehen', next: 'flucht' }
-            ]
-        },
-        kampf: {
-            text: 'Du kämpfst tapfer, aber ohne Schutz bist du unterlegen.',
-            ending: 'Der Geist besiegt dich. Du bist tot.'
-        },
-        flucht: {
-            text: 'Du rennst weg, aber der Vulkan beginnt auszubrechen.',
-            choices: [
-                { text: 'Zum Ausgang sprinten', next: 'rettung' },
-                { text: 'Verstecken', next: 'asche_tot' }
-            ]
-        },
-        asche_tot: {
-            text: 'Du versteckst dich, aber Asche füllt die Höhle.',
-            ending: 'Du erstickst.'
-        },
-        rettung: {
-            text: 'Du erreichst knapp den Ausgang und entkommst.',
-            ending: 'Du hast überlebt!'
-        },
-        schatz: {
-            text: 'Das Amulett führt dich zu einem geheimen Raum mit einem Schatz.',
-            choices: [
-                { text: 'Schatz nehmen', next: 'fluch' },
-                { text: 'Schatz ignorieren und gehen', next: 'rettung' }
-            ]
-        },
-        fluch: {
-            text: 'Der Schatz ist verflucht. Der Geist erscheint erneut.',
-            ending: 'Du wirst vom Fluch verschlungen.'
         }
     }
 };
 
-let hasLoadedVolcanoStoryFromJson = false;
+let currentLevel1NodeId = "";
 
 function isValidVolcanoStory(data) {
-    if (!data || typeof data !== 'object') {
-        return false;
+    if (data && data.start && data.nodes) {
+        return true;
     }
 
-    if (typeof data.start !== 'string') {
-        return false;
-    }
-
-    if (!data.nodes || typeof data.nodes !== 'object') {
-        return false;
-    }
-
-    return true;
+    return false;
 }
 
 async function loadVolcanoStoryFromJson() {
-    if (hasLoadedVolcanoStoryFromJson) {
-        return true;
-    }
-
     try {
-        const response = await fetch('./data/volcano.json', { cache: 'no-cache' });
+        let response = await fetch("./data/volcano.json");
 
         if (!response.ok) {
-            throw new Error('HTTP ' + response.status);
+            throw new Error("Fehler beim Laden");
         }
 
-        const jsonStory = await response.json();
+        let jsonStory = await response.json();
 
-        if (!isValidVolcanoStory(jsonStory)) {
-            throw new Error('Invalid volcano story JSON structure.');
+        if (isValidVolcanoStory(jsonStory)) {
+            volcanoStory = jsonStory;
         }
 
-        volcanoStory = jsonStory;
-        hasLoadedVolcanoStoryFromJson = true;
-        return true;
     } catch (error) {
-        console.error('Could not load ./data/volcano.json. Using built-in fallback story.', error);
-        return false;
+        console.log(error);
     }
 }
 
-
-// Speichert den aktuellen Story-Abschnitt
-let currentLevel1NodeId = null;
-
-
-// Holt einen Node (Story-Teil)
-function getLevel1Node(nodeId) {
-    if (volcanoStory.nodes) {
-        return volcanoStory.nodes[nodeId];
-    } else {
-        return null;
+function setChoice(button, textElement, choice) {
+    if (!choice) {
+        button.style.display = "none";
+        return;
     }
+
+    button.style.display = "inline-block";
+    textElement.textContent = choice.text;
 }
 
-
-// Zeigt einen Node an
 function renderLevel1Node(nodeId) {
-    const node = getLevel1Node(nodeId);
+    let node = volcanoStory.nodes[nodeId];
 
-    // Wenn kein Node gefunden → abbrechen
     if (!node) {
         return;
     }
 
     currentLevel1NodeId = nodeId;
+    level1StoryText.textContent = node.text;
 
-    // TEXT anzeigen
-    if (level1StoryText) {
-        if (node.text) {
-            level1StoryText.textContent = node.text;
-        } else {
-            level1StoryText.textContent = '';
-        }
-    }
-
-    // BILD setzen
     if (level1StoryBoardImage) {
         if (node.ending) {
-            level1StoryBoardImage.src = './img/You-Died-PNG-Photos.png';
-            level1StoryBoardImage.alt = 'You Died';
+            level1StoryBoardImage.src = "./img/You-Died-PNG-Photos.png";
         } else {
-            level1StoryBoardImage.src = './img/Buttons/stone_board-removebg-preview.png';
-            level1StoryBoardImage.alt = 'STONEBOARD';
+            level1StoryBoardImage.src = "./img/Buttons/stone_board-removebg-preview.png";
         }
     }
 
-    // Entscheidungen vorbereiten
-    let choices;
-    if (Array.isArray(node.choices)) {
-        choices = node.choices;
-    } else {
-        choices = [];
-    }
+    setChoice(level1Decision1, level1Decision1Text, node.choices[0]);
+    setChoice(level1Decision2, level1Decision2Text, node.choices[1]);
 
-    let firstChoice;
-    if (choices[0]) {
-        firstChoice = choices[0];
-    } else {
-        firstChoice = null;
-    }
-
-    let secondChoice;
-    if (choices[1]) {
-        secondChoice = choices[1];
-    } else {
-        secondChoice = null;
-    }
-
-    // BUTTON 1
-    if (level1Decision1) {
-        if (firstChoice) {
-            level1Decision1.style.display = 'inline-block';
-            level1Decision1.dataset.next = firstChoice.next;
-        } else {
-            level1Decision1.style.display = 'none';
-            level1Decision1.dataset.next = '';
-        }
-    }
-
-    if (level1Decision1Text) {
-        if (firstChoice) {
-            level1Decision1Text.textContent = firstChoice.text;
-        } else {
-            level1Decision1Text.textContent = '';
-        }
-    }
-
-    // BUTTON 2
-    if (level1Decision2) {
-        if (secondChoice) {
-            level1Decision2.style.display = 'inline-block';
-            level1Decision2.dataset.next = secondChoice.next;
-        } else {
-            level1Decision2.style.display = 'none';
-            level1Decision2.dataset.next = '';
-        }
-    }
-
-    if (level1Decision2Text) {
-        if (secondChoice) {
-            level1Decision2Text.textContent = secondChoice.text;
-        } else {
-            level1Decision2Text.textContent = '';
-        }
-    }
-
-    // Wenn Ende erreicht
     if (node.ending) {
-
-        if (level1Decision1Text) {
-            level1Decision1Text.textContent = 'Nochmal spielen';
-        }
-
-        if (level1Decision1) {
-            level1Decision1.style.display = 'inline-block';
-            level1Decision1.dataset.next = volcanoStory.start;
-        }
-
-        if (level1Decision2) {
-            level1Decision2.style.display = 'none';
-            level1Decision2.dataset.next = '';
-        }
+        level1Decision1Text.textContent = "Nochmal spielen";
+        level1Decision2.style.display = "none";
     }
 }
 
-
-// Story starten
 function startLevel1Story() {
     renderLevel1Node(volcanoStory.start);
 }
 
+function advanceLevel1Story(index) {
+    let node = volcanoStory.nodes[currentLevel1NodeId];
 
-// Nächsten Schritt gehen
-function advanceLevel1Story(choiceIndex) {
-    const node = getLevel1Node(currentLevel1NodeId);
-
-    if (!node) {
-        return;
+    if (node && node.choices[index]) {
+        renderLevel1Node(node.choices[index].next);
     }
-
-    if (!Array.isArray(node.choices)) {
-        return;
-    }
-
-    const choice = node.choices[choiceIndex];
-
-    if (!choice) {
-        return;
-    }
-
-    if (!choice.next) {
-        return;
-    }
-
-    renderLevel1Node(choice.next);
 }
 
+level1Decision1.addEventListener("click", function () {
+    let node = volcanoStory.nodes[currentLevel1NodeId];
 
-// BUTTON 1 Klick
-if (level1Decision1) {
-    level1Decision1.addEventListener('click', function () {
-
-        if (currentLevel1NodeId) {
-
-            const currentNode = getLevel1Node(currentLevel1NodeId);
-
-            if (currentNode) {
-                if (currentNode.ending) {
-                    startLevel1Story();
-                    return;
-                }
-            }
-        }
-
+    if (node.ending) {
+        startLevel1Story();
+    } else {
         advanceLevel1Story(0);
-    });
-}
+    }
+});
 
+level1Decision2.addEventListener("click", function () {
+    advanceLevel1Story(1);
+});
 
-// BUTTON 2 Klick
-if (level1Decision2) {
-    level1Decision2.addEventListener('click', function () {
-        advanceLevel1Story(1);
-    });
-}
+level1Container.style.display = "none";
 
-
-// Am Anfang verstecken
-if (level1Container) {
-    level1Container.style.display = 'none';
-}
-
-
-// Level öffnen
 async function openLevel1() {
-
     if (levelPickContainer) {
-        levelPickContainer.style.display = 'none';
+        levelPickContainer.style.display = "none";
     }
 
-    if (level1Container) {
-        level1Container.style.display = 'flex';
-    }
+    level1Container.style.display = "flex";
 
     await loadVolcanoStoryFromJson();
     startLevel1Story();
 }
 
-
-// Level schließen
 function closeLevel1() {
-    if (level1Container) {
-        level1Container.style.display = 'none';
-    }
+    level1Container.style.display = "none";
 }
 
 loadVolcanoStoryFromJson();
