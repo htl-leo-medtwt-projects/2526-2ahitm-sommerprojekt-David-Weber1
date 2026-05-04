@@ -98,3 +98,89 @@ let castleStory = {
         }
     }
 };
+
+
+// Aktueller Knoten Level 2
+let currentLvl2Node = "";
+
+// Render-Funktion Level 2
+function renderLevel2Node(nodeId) {
+    let node = castleStory.nodes[nodeId];
+    
+    if (!node) return;
+    
+    currentLvl2Node = nodeId;
+    let storyImg = level2StoryBoard ? level2StoryBoard.querySelector('img') : null;
+
+    if (node.ending) {
+        if (storyImg) {
+            if (node.ending.includes('Tod')) {
+                storyImg.src = "./img/You-Died-PNG-Photos.png";
+            } else {
+                storyImg.src = "./img/Buttons/achievmentBtnAndTrophie.png";
+            }
+        }
+        if (level2StoryText) level2StoryText.textContent = node.ending;
+        if (level2Decision1Text) level2Decision1Text.textContent = "Neu starten";
+        if (level2Decision1) level2Decision1.style.visibility = "visible";
+        if (level2Decision2) level2Decision2.style.visibility = "hidden";
+    } else {
+        if (level2StoryText) level2StoryText.textContent = node.text;
+        if (storyImg) storyImg.src = "./img/Buttons/stone_board-removebg-preview.png";
+
+        // Choice 1
+        if (node.choices && node.choices[0]) {
+            if (level2Decision1) level2Decision1.style.visibility = "visible";
+            if (level2Decision1Text) level2Decision1Text.textContent = node.choices[0].text;
+        } else {
+            if (level2Decision1) level2Decision1.style.visibility = "hidden";
+        }
+
+        // Choice 2
+        if (node.choices && node.choices[1]) {
+            if (level2Decision2) level2Decision2.style.visibility = "visible";
+            if (level2Decision2Text) level2Decision2Text.textContent = node.choices[1].text;
+        } else {
+            if (level2Decision2) level2Decision2.style.visibility = "hidden";
+        }
+    }
+}
+
+// Level 2 öffnen
+function openLevel2() {
+    if (levelPickContainerLvl2) levelPickContainerLvl2.style.display = "none";
+    if (level2Container) level2Container.style.display = "flex";
+    renderLevel2Node(castleStory.start);
+}
+
+// Level 2 schließen
+function closeLevel2() {
+    if (level2Container) level2Container.style.display = "none";
+    if (levelPickContainerLvl2) levelPickContainerLvl2.style.display = "flex";
+}
+
+if (level2Decision1) {
+    level2Decision1.addEventListener("click", () => {
+        if (level2Container && level2Container.style.display === "flex" && currentLvl2Node !== "") {
+            let node = castleStory.nodes[currentLvl2Node];
+            if (node) {
+                if (node.ending) {
+                    renderLevel2Node(castleStory.start);
+                } else if (node.choices && node.choices[0]) {
+                    renderLevel2Node(node.choices[0].next);
+                }
+            }
+        }
+    });
+}
+
+if (level2Decision2) {
+    level2Decision2.addEventListener("click", () => {
+        if (level2Container && level2Container.style.display === "flex" && currentLvl2Node !== "") {
+            let node = castleStory.nodes[currentLvl2Node];
+            if (node && node.choices && node.choices[1]) {
+                renderLevel2Node(node.choices[1].next);
+            }
+        }
+    });
+}
