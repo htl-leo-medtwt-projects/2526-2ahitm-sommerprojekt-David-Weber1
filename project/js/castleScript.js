@@ -159,3 +159,28 @@ function closeLevel2() {
     if (levelPickContainerLvl2) levelPickContainerLvl2.style.display = "flex";
 }
 
+if (level2Decision1) {
+    level2Decision1.addEventListener("click", () => {
+        if (level2Container && level2Container.style.display === "flex" && currentLvl2Node !== "") {
+            let node = castleStory.nodes[currentLvl2Node];
+            if (node) {
+                if (node.ending) {
+                    renderLevel2Node(castleStory.start);
+                } else if (node.choices && node.choices[0]) {
+                    renderLevel2Node(node.choices[0].next);
+                }
+            }
+        }
+    });
+}
+
+if (level2Decision2) {
+    level2Decision2.addEventListener("click", () => {
+        if (level2Container && level2Container.style.display === "flex" && currentLvl2Node !== "") {
+            let node = castleStory.nodes[currentLvl2Node];
+            if (node && node.choices && node.choices[1]) {
+                renderLevel2Node(node.choices[1].next);
+            }
+        }
+    });
+}
