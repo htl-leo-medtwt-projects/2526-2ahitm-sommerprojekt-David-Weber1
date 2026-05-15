@@ -16,7 +16,7 @@ let volcanoStory = {
             "choices": [
                 { "text": "Den Gipfel stürmen", "next": "aufstieg" },
                 { "text": "Im Dorf Schutz suchen", "next": "dorf" }
-            ]
+            ]                                                   
         },
         "dorf": {
             "text": "In den Ruinen triffst du einen Eremiten. Seine Augen leuchten unnatürlich. Er bietet dir ein Obsidian-Amulett an: 'Es flüstert mit dem Feuer, Reisender.'",
@@ -116,10 +116,8 @@ let volcanoStory = {
     }
 };
 
-// Aktueller Knoten
 let currentLvl1Node = "";
 
-// Render-Funktion für Level 1
 function renderLevel1Node(nodeId) {
     let node = volcanoStory.nodes[nodeId];
     
@@ -139,6 +137,7 @@ function renderLevel1Node(nodeId) {
             }
         }
         level1StoryText.textContent = node.ending;
+        //Gsap mit ki
         if (typeof gsap !== 'undefined' && level1StoryBoard) {
             gsap.fromTo(level1StoryBoard, {autoAlpha:0, y:20}, {duration:0.8, autoAlpha:1, y:0, ease: "power2.out"});
         }
@@ -151,7 +150,6 @@ function renderLevel1Node(nodeId) {
             storyImg.src = "./img/Buttons/stone_board-removebg-preview.png";
         }
         
-        // Choice 1
         if (node.choices[0]) {
             level1Decision1.style.visibility = "visible";
             level1Decision1Text.textContent = node.choices[0].text;
@@ -159,7 +157,6 @@ function renderLevel1Node(nodeId) {
             level1Decision1.style.visibility = "hidden";
         }
         
-        // Choice 2
         if (node.choices[1]) {
             level1Decision2.style.visibility = "visible";
             level1Decision2Text.textContent = node.choices[1].text;
@@ -172,20 +169,17 @@ function renderLevel1Node(nodeId) {
     }
 }
 
-// Level 1 öffnen
 function openLevel1() {
     document.getElementById('levelPickContainer').style.display = "none";
     level1Container.style.display = "flex";
     renderLevel1Node(volcanoStory.start);
 }
 
-// Level 1 schließen
 function closeLevel1() {
     level1Container.style.display = "none";
     document.getElementById('levelPickContainer').style.display = "flex";
 }
 
-// Entscheidungs-Handler
 level1Decision1.addEventListener("click", () => {
     let node = volcanoStory.nodes[currentLvl1Node];
     if (node && node.ending) {
