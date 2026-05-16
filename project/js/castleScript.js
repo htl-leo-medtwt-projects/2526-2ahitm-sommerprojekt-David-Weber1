@@ -144,6 +144,10 @@ function renderLevel2Node(nodeId) {
             if (level2Decision2) level2Decision2.style.visibility = "hidden";
         }
     }
+
+    if (typeof gsap !== 'undefined' && level2StoryBoard) {
+        gsap.fromTo(level2StoryBoard, {autoAlpha:0, y:20}, {duration:0.8, autoAlpha:1, y:0, ease: "power2.out"});
+    }
 }
 
 // Level 2 öffnen

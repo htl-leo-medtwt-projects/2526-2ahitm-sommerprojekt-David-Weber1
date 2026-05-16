@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "VCR OSD Mono";
+  src: url("../font/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf") format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#level4Container {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: url("../img/Backgrounds/pixelHouseBg.jpg") center / cover no-repeat fixed;
+  overflow: auto;
+  font-family: "VCR OSD Mono";
+  z-index: 1100;
+}
+
+.level4BoardSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  width: 100%;
+  padding: 20px;
+}
+
+.level4BigImg,
+.level4SmallImg {
+  position: relative;
+}
+
+.level4BigImg {
+  width: min(82vw, 840px);
+}
+
+.level4BigImg img,
+.level4SmallImg img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.level4BigImg p,
+.level4SmallImg p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+  color: #1f1f1f;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+.level4BigImg p {
+  width: 78%;
+  line-height: 1.35;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+}
+
+.level4SmallImg {
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.level4SmallImg img {
+  width: min(34vw, 320px);
+}
+
+.level4SmallImg p {
+  width: 80%;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+.level4SmallRow {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.level4SmallImg:hover {
+  transform: translateY(-4px) scale(1.03);
+  filter: brightness(1.08);
+}
+
+.level4SmallImg:active {
+  transform: translateY(1px) scale(0.98);
+}

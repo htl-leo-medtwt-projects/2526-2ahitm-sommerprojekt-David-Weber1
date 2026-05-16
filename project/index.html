@@ -11,11 +11,13 @@
     <script src="./js/volcanoScript.js" defer></script>
     <script src="./js/castleScript.js" defer></script>
     <script src="./js/woodScript.js" defer></script>
+    <script src="./js/houseScript.js" defer></script>
     <link rel="icon" href="./img/LogoImg.png" type="image/png">
     <link rel="stylesheet" href="./css/tutorialStyle.css">
     <link rel="stylesheet" href="./css/achievmentsStyle.css">
     <link rel="stylesheet" href="./css/LevelPickStyle.css">
     <link rel="stylesheet" href="./css/woodStyle.css">
+    <link rel="stylesheet" href="./css/houseStyle.css">
 
 
 </head>
@@ -159,7 +161,7 @@
                 </div>
             </a>
 
-            <a href="#">
+            <a onclick="openLevel4(); return false;" href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/pixelHouseBg.jpg" alt="Level 4">
                     <div class="label">Level 4</div>
@@ -241,6 +243,30 @@
                 <div id="level3Decision2" class="level3SmallImg level1DecisionBtn story-decision">
                     <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
                     <p id="level3Decision2Text" class="decision-text">Entscheidung 2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="level4Container" style="display: none;">
+        <div onclick="closeLevel4()" class="backBtn">
+            <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="GO BACK">
+        </div>
+
+        <div id="level4StorySection" class="level4BoardSection story-section">
+            <div id="level4StoryBoard" class="level4BigImg story-board">
+                <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                <p id="level4StoryText" class="story-text">Willkommen im Herrenhaus. Triff deine Entscheidung.</p>
+            </div>
+
+            <div id="level4DecisionRow" class="level4SmallRow decision-row">
+                <div id="level4Decision1" class="level4SmallImg level1DecisionBtn story-decision">
+                    <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                    <p id="level4Decision1Text" class="decision-text">Entscheidung 1</p>
+                </div>
+                <div id="level4Decision2" class="level4SmallImg level1DecisionBtn story-decision">
+                    <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                    <p id="level4Decision2Text" class="decision-text">Entscheidung 2</p>
                 </div>
             </div>
         </div>
