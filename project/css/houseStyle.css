@@ -52,8 +52,11 @@
   transform: translate(-50%, -50%);
   margin: 0;
   text-align: center;
-  color: #1f1f1f;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.45);
+  padding: 0.35em 0.6em;
+  border-radius: 6px;
   pointer-events: none;
 }
 
@@ -92,4 +95,74 @@
 
 .level4SmallImg:active {
   transform: translateY(1px) scale(0.98);
+}
+
+.graveyard-gif {
+  position: fixed;
+  bottom: 6vh;
+  width: clamp(180px, 18vw, 360px);
+  pointer-events: none;
+  z-index: 1150;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,0.55));
+}
+
+.graveyard-left {
+  left: 3vw;
+}
+
+.graveyard-right {
+  right: 3vw;
+}
+
+@media (max-width: 640px) {
+  .graveyard-gif {
+    display: none;
+  }
+}
+
+.golem-gif {
+  position: fixed;
+  bottom: 10vh;
+  width: clamp(160px, 16vw, 340px);
+  pointer-events: none;
+  z-index: 1160;
+  transform: translateY(6%);
+}
+
+.golem-left {
+  left: 8vw;
+}
+
+.golem-right {
+  right: 8vw;
+}
+
+@media (max-width: 640px) {
+  .golem-gif {
+    display: none;
+  }
+}
+
+.zombie-gif {
+  position: fixed;
+  bottom: 8vh;
+  width: clamp(140px, 14vw, 320px);
+  pointer-events: none;
+  z-index: 1165;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
+  transform: translateY(4%);
+}
+
+.zombie-left {
+  left: 6vw;
+}
+
+.zombie-right {
+  right: 6vw;
+}
+
+@media (max-width: 640px) {
+  .zombie-gif {
+    display: none;
+  }
 }
