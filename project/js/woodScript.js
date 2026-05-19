@@ -1,4 +1,3 @@
-// DOM-Elemente Level 3
 const level3Container = document.getElementById('level3Container');
 const level3StoryText = document.getElementById('level3StoryText');
 const level3Decision1 = document.getElementById('level3Decision1');
@@ -7,7 +6,6 @@ const level3Decision1Text = document.getElementById('level3Decision1Text');
 const level3Decision2Text = document.getElementById('level3Decision2Text');
 const level3StoryBoard = document.getElementById('level3StoryBoard');
 
-// Story-Daten Level 3
 let megaForestStory = {
     "start": "waldrand",
     "nodes": {

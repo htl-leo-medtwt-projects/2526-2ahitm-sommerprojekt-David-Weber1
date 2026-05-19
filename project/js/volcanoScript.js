@@ -1,4 +1,3 @@
-// DOM-Elemente Level 1
 const level1Container = document.getElementById('level1Container');
 const level1StoryText = document.getElementById('level1StoryText');
 const level1Decision1 = document.getElementById('level1Decision1');
@@ -7,7 +6,6 @@ const level1Decision1Text = document.getElementById('level1Decision1Text');
 const level1Decision2Text = document.getElementById('level1Decision2Text');
 const level1StoryBoard = document.getElementById('level1StoryBoard');
 
-// Story-Daten Level 1
 let volcanoStory = {
     "start": "intro",
     "nodes": {
@@ -137,6 +135,13 @@ function renderLevel1Node(nodeId) {
             }
         }
         level1StoryText.textContent = node.ending;
+        if (node.ending.includes('Sieg')) {
+            try {
+                localStorage.setItem('volcanoWin', 'true');
+            } catch (e) {
+            }
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'volcanoWin' } }));
+        }
         //Gsap mit ki
         if (typeof gsap !== 'undefined' && level1StoryBoard) {
             gsap.fromTo(level1StoryBoard, {autoAlpha:0, y:20}, {duration:0.8, autoAlpha:1, y:0, ease: "power2.out"});

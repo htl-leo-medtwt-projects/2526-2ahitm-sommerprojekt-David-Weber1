@@ -1,4 +1,3 @@
-// DOM-Elemente Level 4
 const level4Container = document.getElementById('level4Container');
 const level4StoryText = document.getElementById('level4StoryText');
 const level4Decision1 = document.getElementById('level4Decision1');
@@ -7,7 +6,6 @@ const level4Decision1Text = document.getElementById('level4Decision1Text');
 const level4Decision2Text = document.getElementById('level4Decision2Text');
 const level4StoryBoard = document.getElementById('level4StoryBoard');
 
-// Story-Daten Level 4 (house)
 let megaHouseStory = {
     "start": "vorgarten",
     "nodes": {

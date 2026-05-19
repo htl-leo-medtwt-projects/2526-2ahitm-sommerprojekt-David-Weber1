@@ -28,7 +28,6 @@ function toggleAudio() {
     }
 }
 
-// animate audioBox on load
 document.addEventListener('DOMContentLoaded', () => {
     if (!audioBox) return;
     if (typeof gsap !== 'undefined') {

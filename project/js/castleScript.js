@@ -1,4 +1,3 @@
-// DOM-Elemente Level 2
 const level2Container = document.getElementById('level2Container');
 const level2StoryText = document.getElementById('level2StoryText');
 const level2Decision1 = document.getElementById('level2Decision1');
@@ -8,7 +7,6 @@ const level2Decision2Text = document.getElementById('level2Decision2Text');
 const level2StoryBoard = document.getElementById('level2StoryBoard');
 const levelPickContainerLvl2 = document.getElementById('levelPickContainer');
 
-// Story-Daten Level 2
 let castleStory = {
     "start": "schlosstor",
     "nodes": {
@@ -100,10 +98,8 @@ let castleStory = {
 };
 
 
-// Aktueller Knoten Level 2
 let currentLvl2Node = "";
 
-// Render-Funktion Level 2
 function renderLevel2Node(nodeId) {
     let node = castleStory.nodes[nodeId];
     
@@ -128,7 +124,6 @@ function renderLevel2Node(nodeId) {
         if (level2StoryText) level2StoryText.textContent = node.text;
         if (storyImg) storyImg.src = "./img/Buttons/stone_board-removebg-preview.png";
 
-        // Choice 1
         if (node.choices && node.choices[0]) {
             if (level2Decision1) level2Decision1.style.visibility = "visible";
             if (level2Decision1Text) level2Decision1Text.textContent = node.choices[0].text;
@@ -136,7 +131,6 @@ function renderLevel2Node(nodeId) {
             if (level2Decision1) level2Decision1.style.visibility = "hidden";
         }
 
-        // Choice 2
         if (node.choices && node.choices[1]) {
             if (level2Decision2) level2Decision2.style.visibility = "visible";
             if (level2Decision2Text) level2Decision2Text.textContent = node.choices[1].text;
@@ -150,14 +144,12 @@ function renderLevel2Node(nodeId) {
     }
 }
 
-// Level 2 öffnen
 function openLevel2() {
     if (levelPickContainerLvl2) levelPickContainerLvl2.style.display = "none";
     if (level2Container) level2Container.style.display = "flex";
     renderLevel2Node(castleStory.start);
 }
 
-// Level 2 schließen
 function closeLevel2() {
     if (level2Container) level2Container.style.display = "none";
     if (levelPickContainerLvl2) levelPickContainerLvl2.style.display = "flex";
