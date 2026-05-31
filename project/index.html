@@ -117,23 +117,7 @@
             <figure class="achievment">
                 <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
                 <figcaption>Achievement 8</figcaption>
-            </figure>
-            <figure class="achievment">
-                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
-                <figcaption>Achievement 9</figcaption>
-            </figure>
-            <figure class="achievment">
-                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
-                <figcaption>Achievement 10</figcaption>
-            </figure>
-            <figure class="achievment">
-                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
-                <figcaption>Achievement 11</figcaption>
-            </figure>
-            <figure class="achievment">
-                <img src="./img/Buttons/achievmentBtnAndTrophie.png" alt="TROPHIE">
-                <figcaption>Achievement 12</figcaption>
-            </figure>
+
         </main>
     </div>
     <div id="levelPickContainer">
@@ -143,7 +127,7 @@
             <a onclick="openLevel1(); return false;" href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/volcano.jpg" alt="Level 1">
-                    <div class="label">Level 1</div>
+                    <div class="label">Story 1</div>
                 </div>
             </a>
 
@@ -151,21 +135,21 @@
                 <a onclick="openLevel2(); return false;" href="#">
                     <div class="card">
                         <img src="./img/Backgrounds/castleBg.jpg" alt="Level 2">
-                        <div class="label">Level 2</div>
+                        <div class="label">Story 2</div>
                     </div>
                 </a>
             </div>
             <a onclick="openLevel3(); return false;" href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/darkForestBg.jpg" alt="Level 3">
-                    <div class="label">Level 3</div>
+                    <div class="label">Story 3</div>
                 </div>
             </a>
 
             <a onclick="openLevel4(); return false;" href="#">
                 <div class="card">
                     <img src="./img/Backgrounds/pixelHouseBg.jpg" alt="Level 4">
-                    <div class="label">Level 4</div>
+                    <div class="label">Story 4</div>
                 </div>
             </a>
         </div>
@@ -204,31 +188,32 @@
         </div>
     </div>
 
-<div id="level2Container" style="display: none;">
-    <div onclick="closeLevel2()" class="backBtn">
-        <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="GO BACK">
-    </div>
-
-    <div id="level2StorySection" class="level2BoardSection story-section">
-        <div id="level2StoryBoard" class="level2BigImg story-board">
-            <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
-            <p id="level2StoryText" class="story-text">Willkommen im Schloss Aethelgard. Triff deine Entscheidung.</p>
+    <div id="level2Container" style="display: none;">
+        <div onclick="closeLevel2()" class="backBtn">
+            <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="GO BACK">
         </div>
 
-        <img class="zombie-gif zombie-left" src="./img/gif/zombie.gif" alt="zombie gif">
-
-        <div id="level2DecisionRow" class="level2SmallRow decision-row">
-            <div id="level2Decision1" class="level2SmallImg level1DecisionBtn story-decision">
+        <div id="level2StorySection" class="level2BoardSection story-section">
+            <div id="level2StoryBoard" class="level2BigImg story-board">
                 <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
-                <p id="level2Decision1Text" class="decision-text">Entscheidung 1</p>
+                <p id="level2StoryText" class="story-text">Willkommen im Schloss Aethelgard. Triff deine Entscheidung.
+                </p>
             </div>
-            <div id="level2Decision2" class="level2SmallImg level1DecisionBtn story-decision">
-                <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
-                <p id="level2Decision2Text" class="decision-text">Entscheidung 2</p>
+
+            <img class="zombie-gif zombie-left" src="./img/gif/zombie.gif" alt="zombie gif">
+
+            <div id="level2DecisionRow" class="level2SmallRow decision-row">
+                <div id="level2Decision1" class="level2SmallImg level1DecisionBtn story-decision">
+                    <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                    <p id="level2Decision1Text" class="decision-text">Entscheidung 1</p>
+                </div>
+                <div id="level2Decision2" class="level2SmallImg level1DecisionBtn story-decision">
+                    <img src="./img/Buttons/stone_board-removebg-preview.png" alt="STONEBOARD">
+                    <p id="level2Decision2Text" class="decision-text">Entscheidung 2</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <div id="level3Container" style="display: none;">
         <div onclick="closeLevel3()" class="backBtn">
             <img src="./img/Buttons/closeWoodBtn-removebg-preview.png" alt="GO BACK">
@@ -292,4 +277,3 @@
 </body>
 
 </html>
-

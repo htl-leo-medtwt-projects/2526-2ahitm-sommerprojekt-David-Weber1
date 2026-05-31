@@ -11,13 +11,15 @@ let volcanoStory = {
     "nodes": {
         "intro": {
             "text": "Der Boden unter deinen Stiefeln ist heiß. Der Vulkan 'Ignis' grollt bedrohlich. Am Horizont siehst du ein verlassenes Dorf, während der Pfad zum Gipfel steil und aschebedeckt ist.",
+            "image": "./img/Backgrounds/vulkan_story/aufstieg.png",
             "choices": [
                 { "text": "Den Gipfel stürmen", "next": "aufstieg" },
                 { "text": "Im Dorf Schutz suchen", "next": "dorf" }
-            ]                                                   
+            ]
         },
         "dorf": {
             "text": "In den Ruinen triffst du einen Eremiten. Seine Augen leuchten unnatürlich. Er bietet dir ein Obsidian-Amulett an: 'Es flüstert mit dem Feuer, Reisender.'",
+            "image": "./img/Backgrounds/vulkan_story/dorf.png",
             "choices": [
                 { "text": "Amulett annehmen", "next": "aufstieg_mit_amulett" },
                 { "text": "Misstrauisch gehen", "next": "aufstieg_misstrauisch" }
@@ -25,6 +27,7 @@ let volcanoStory = {
         },
         "aufstieg": {
             "text": "Ohne Vorwarnung bricht der Pfad weg! Schwefelgase rauben dir den Atem. Du siehst eine dunkle Spalte und einen rutschigen Hang.",
+            "image": "./img/Backgrounds/vulkan_story/aufstieg.png",
             "choices": [
                 { "text": "In die Spalte springen", "next": "hoehle" },
                 { "text": "Den Hang hinabrennen", "next": "sturz" }
@@ -39,6 +42,7 @@ let volcanoStory = {
         },
         "aufstieg_mit_amulett": {
             "text": "Das Amulett vibriert an deiner Brust. Plötzlich teilt sich der dichte Rauch und offenbart einen geheimen Pfad, der sicher am Lavastrom vorbeiführt.",
+            "image": "./img/Backgrounds/vulkan_story/auftieg_mit_amulett.jpeg",
             "choices": [
                 { "text": "Dem Pfad folgen", "next": "magma_kammer" },
                 { "text": "Die Warnung ignorieren", "next": "aufstieg" }
@@ -46,6 +50,7 @@ let volcanoStory = {
         },
         "magma_kammer": {
             "text": "Du erreichst das Herz des Vulkans. Die Wände glühen. In der Mitte schwebt ein flammendes Schwert. Das Amulett glüht jetzt hellblau.",
+            "image": "./img/Backgrounds/vulkan_story/magmar_kammer.png",
             "choices": [
                 { "text": "Schwert greifen", "next": "waechter_kampf" },
                 { "text": "Raum untersuchen", "next": "geheimnis_altar" }
@@ -115,15 +120,28 @@ let volcanoStory = {
 };
 
 let currentLvl1Node = "";
+let lastLevelBg = "";
 
 function renderLevel1Node(nodeId) {
     let node = volcanoStory.nodes[nodeId];
-    
+
     if (!node) {
         return;
     }
     
     currentLvl1Node = nodeId;
+    if (level1Container) {
+        if (node.image) {
+            lastLevelBg = node.image;
+        }
+        if (lastLevelBg) {
+            level1Container.style.backgroundImage = `url("${lastLevelBg}")`;
+            level1Container.style.backgroundSize = "cover";
+            level1Container.style.backgroundPosition = "center";
+        } else {
+            level1Container.style.backgroundImage = "";
+        }
+    }
     let storyImg = level1StoryBoard.querySelector('img');
 
     if (node.ending) {
@@ -142,9 +160,17 @@ function renderLevel1Node(nodeId) {
             }
             window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'volcanoWin' } }));
         }
+
+        if (node.ending.includes('Tod')) {
+            try {
+                localStorage.setItem('volcanoDeath', 'true');
+            } catch (e) {
+            }
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'volcanoDeath' } }));
+        }
         //Gsap mit ki
         if (typeof gsap !== 'undefined' && level1StoryBoard) {
-            gsap.fromTo(level1StoryBoard, {autoAlpha:0, y:20}, {duration:0.8, autoAlpha:1, y:0, ease: "power2.out"});
+            gsap.fromTo(level1StoryBoard, { autoAlpha: 0, y: 20 }, { duration: 0.8, autoAlpha: 1, y: 0, ease: "power2.out" });
         }
         level1Decision1Text.textContent = "Neu starten";
         level1Decision1.style.visibility = "visible";
@@ -154,14 +180,14 @@ function renderLevel1Node(nodeId) {
         if (storyImg) {
             storyImg.src = "./img/Buttons/stone_board-removebg-preview.png";
         }
-        
+
         if (node.choices[0]) {
             level1Decision1.style.visibility = "visible";
             level1Decision1Text.textContent = node.choices[0].text;
         } else {
             level1Decision1.style.visibility = "hidden";
         }
-        
+
         if (node.choices[1]) {
             level1Decision2.style.visibility = "visible";
             level1Decision2Text.textContent = node.choices[1].text;
@@ -169,7 +195,7 @@ function renderLevel1Node(nodeId) {
             level1Decision2.style.visibility = "hidden";
         }
         if (typeof gsap !== 'undefined' && level1StoryBoard) {
-            gsap.fromTo(level1StoryBoard, {autoAlpha:0, y:20}, {duration:0.8, autoAlpha:1, y:0, ease: "power2.out"});
+            gsap.fromTo(level1StoryBoard, { autoAlpha: 0, y: 20 }, { duration: 0.8, autoAlpha: 1, y: 0, ease: "power2.out" });
         }
     }
 }

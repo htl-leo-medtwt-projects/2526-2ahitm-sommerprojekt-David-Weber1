@@ -1,31 +1,32 @@
 
-//Von der Ki
-
 document.addEventListener('DOMContentLoaded', () => {
-	function updateVolcanoAchievement() {
-		const achieved = localStorage.getItem('volcanoWin') === 'true';
-		const ach = document.querySelectorAll('.achievment');
-		if (!ach || ach.length === 0) return;
-		const first = ach[0];
-		const img = first.querySelector('img');
-		const caption = first.querySelector('figcaption');
+	const mapping = { volcanoWin: 0, volcanoDeath: 1 };
+	const ach = document.querySelectorAll('.achievment');
+	if (!ach || ach.length === 0) return;
 
-		if (achieved) {
-			first.classList.add('unlocked');
-			if (caption) caption.textContent = 'Achievement 1 — Unlocked';
-			if (img) img.style.filter = 'none';
-		} else {
-			if (caption) caption.textContent = 'Achievement 1';
-			if (img) img.style.filter = 'grayscale(1) opacity(0.6)';
+	function unlockAchievementByKey(key) {
+		const idx = mapping[key];
+		if (idx == null) return;
+		const el = ach[idx];
+		if (!el) return;
+		const img = el.querySelector('img');
+		const caption = el.querySelector('figcaption');
+
+		el.classList.add('unlocked');
+		if (img) img.style.filter = 'none';
+		if (caption) {
+			if (key === 'volcanoWin') caption.textContent = 'Achievement 1 — Unlocked';
+			else if (key === 'volcanoDeath') caption.textContent = 'Achievement 2 — Unlocked';
+			else caption.textContent = 'Achievement — Unlocked';
 		}
 	}
 
-	updateVolcanoAchievement();
+	Object.keys(mapping).forEach((key) => {
+		if (localStorage.getItem(key) === 'true') unlockAchievementByKey(key);
+	});
 
 	window.addEventListener('achievementUnlocked', (e) => {
-		if (e && e.detail && e.detail.key === 'volcanoWin') {
-			updateVolcanoAchievement();
-		}
+		if (e && e.detail && e.detail.key) unlockAchievementByKey(e.detail.key);
 	});
 });
 
