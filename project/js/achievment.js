@@ -1,6 +1,15 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-	const mapping = { volcanoWin: 0, volcanoDeath: 1 };
+	const mapping = { 
+		volcanoWin: 0, 
+		volcanoDeath: 1,
+		castleWin: 2,
+		castleDeath: 3,
+		forestWin: 4,
+		forestDeath: 5,
+		houseWin: 6,
+		houseDeath: 7
+	};
 	const ach = document.querySelectorAll('.achievment');
 	if (!ach || ach.length === 0) return;
 

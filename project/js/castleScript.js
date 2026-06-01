@@ -117,6 +117,14 @@ function renderLevel2Node(nodeId) {
             }
         }
         if (level2StoryText) level2StoryText.textContent = node.ending;
+        if (node.ending.includes('Sieg')) {
+            try { localStorage.setItem('castleWin', 'true'); } catch (e) {}
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'castleWin' } }));
+        }
+        if (node.ending.includes('Tod')) {
+            try { localStorage.setItem('castleDeath', 'true'); } catch (e) {}
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'castleDeath' } }));
+        }
         if (level2Decision1Text) level2Decision1Text.textContent = "Neu starten";
         if (level2Decision1) level2Decision1.style.visibility = "visible";
         if (level2Decision2) level2Decision2.style.visibility = "hidden";

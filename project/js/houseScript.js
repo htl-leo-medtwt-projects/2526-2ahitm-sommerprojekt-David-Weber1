@@ -149,6 +149,14 @@ function renderLevel4Node(nodeId) {
             }
         }
         if (level4StoryText) level4StoryText.textContent = node.ending;
+        if (node.ending.includes('Sieg')) {
+            try { localStorage.setItem('houseWin', 'true'); } catch (e) {}
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'houseWin' } }));
+        }
+        if (node.ending.includes('Tod')) {
+            try { localStorage.setItem('houseDeath', 'true'); } catch (e) {}
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'houseDeath' } }));
+        }
         if (level4Decision1Text) level4Decision1Text.textContent = "Neu starten";
         if (level4Decision1) level4Decision1.style.visibility = "visible";
         if (level4Decision2) level4Decision2.style.visibility = "hidden";

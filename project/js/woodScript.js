@@ -149,6 +149,14 @@ function renderLevel3Node(nodeId) {
             }
         }
         if (level3StoryText) level3StoryText.textContent = node.ending;
+        if (node.ending.includes('Sieg')) {
+            try { localStorage.setItem('forestWin', 'true'); } catch (e) {}
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'forestWin' } }));
+        }
+        if (node.ending.includes('Tod')) {
+            try { localStorage.setItem('forestDeath', 'true'); } catch (e) {}
+            window.dispatchEvent(new CustomEvent('achievementUnlocked', { detail: { key: 'forestDeath' } }));
+        }
         if (level3Decision1Text) level3Decision1Text.textContent = "Neu starten";
         if (level3Decision1) level3Decision1.style.visibility = "visible";
         if (level3Decision2) level3Decision2.style.visibility = "hidden";
