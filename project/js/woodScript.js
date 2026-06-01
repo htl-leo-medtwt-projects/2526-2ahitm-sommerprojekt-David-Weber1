@@ -10,6 +10,7 @@ let megaForestStory = {
     "start": "waldrand",
     "nodes": {
         "waldrand": {
+            "image": "./img/Backgrounds/startBgImgForest.png",
             "text": "Du stehst am Rand des Finsterwaldes. Die Äste der uralten Bäume wirken wie knöcherne Finger. Ein dichter Nebel kriecht über den Boden. Am Pfad liegt ein ritueller Opferdolch.",
             "choices": [
                 { "text": "Dolch einstecken", "next": "pfad_bewaffnet" },
@@ -17,6 +18,7 @@ let megaForestStory = {
             ]
         },
         "pfad_bewaffnet": {
+            "image": "./img/Backgrounds/darkForestBg.jpg",
             "text": "Der Dolch vibriert in deiner Tasche und leuchtet schwach rot. Das Licht enthüllt zwei Wege: Einen Pfad, der zu den Ruinen einer vergessenen Elfenstadt führt, und ein tiefes, dunkles Dickicht, aus dem ein Knurren ertönt.",
             "choices": [
                 { "text": "Zu den Ruinen gehen", "next": "elfen_ruinen" },
@@ -24,6 +26,7 @@ let megaForestStory = {
             ]
         },
         "elfen_ruinen": {
+            "image": "./img/Backgrounds/woods_Story/elfen_ruinen.png",
             "text": "Zwischen moosbedeckten Säulen brennt ein blaues Feuer. Eine uralte Steinstatue erwacht zum Leben und versperrt den Weg. Der Dolch in deiner Hand beginnt heiß zu werden.",
             "choices": [
                 { "text": "Dolch in die Statue rammen", "next": "statue_zerbricht" },
@@ -38,6 +41,7 @@ let megaForestStory = {
             ]
         },
         "hexenhuette_entdeckung": {
+            "image": "./img/Backgrounds/woods_Story/hexenhuette_entdeckunhg.png",
             "text": "Du erreichst eine Hütte, die auf riesigen Krähenfüßen steht. Die Tür öffnet sich und eine alte Waldhexe blickt heraus. Sie bietet dir ein leuchtendes Elixier an im Tausch für deine Waffe.",
             "choices": [
                 { "text": "Dolch abgeben und Elixier trinken", "next": "baeren_kraft" },
@@ -45,6 +49,7 @@ let megaForestStory = {
             ]
         },
         "wolfsjagd": {
+            "image": "./img/Backgrounds/woods_Story/wolfsjagd.png",
             "text": "Ein riesiger Schattenwolf springt aus dem Gebüsch! Dank des rituellen Dolches weicht die Bestie jedoch zurück. Sie packt dich am Ärmel und zieht dich sanft zu einem geheimen, unterirdischen Höhleneingang.",
             "choices": [
                 { "text": "In die Höhle hinabsteigen", "next": "hoehlen_labyrinth" },
@@ -73,6 +78,7 @@ let megaForestStory = {
             ]
         },
         "bootsfahrt_nebel": {
+            "image": "./img/Backgrounds/woods_Story/bootsfahrt_nebel.png",
             "text": "Die Fahrt ist totenstill. Am anderen Ufer angekommen, verlangt der Fährmann einen Tribut: 'Ich zeige dir den Weg zum Herz des Waldes, wenn du mir all deine Erinnerungen schenkst.'",
             "choices": [
                 { "text": "Erinnerungen eintauschen", "next": "geheimgang_lichtung" },
@@ -133,11 +139,22 @@ let megaForestStory = {
 };
 
 let currentLvl3Node = "";
+let lastLevelBg = "";
 
 function renderLevel3Node(nodeId) {
     let node = megaForestStory.nodes[nodeId];
     if (!node) return;
     currentLvl3Node = nodeId;
+    if (level3Container) {
+        if (node.image) lastLevelBg = node.image;
+        if (lastLevelBg) {
+            level3Container.style.backgroundImage = `url("${lastLevelBg}")`;
+            level3Container.style.backgroundSize = "cover";
+            level3Container.style.backgroundPosition = "center";
+        } else {
+            level3Container.style.backgroundImage = "";
+        }
+    }
     let storyImg = level3StoryBoard ? level3StoryBoard.querySelector('img') : null;
 
     if (node.ending) {

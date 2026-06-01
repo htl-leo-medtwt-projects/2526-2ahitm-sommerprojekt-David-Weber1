@@ -10,6 +10,7 @@ let megaHouseStory = {
     "start": "vorgarten",
     "nodes": {
         "vorgarten": {
+            "image": "./img/Backgrounds/pixelHouseBg.jpg",
             "text": "Du stehst im verwilderten Vorgarten eines riesigen, baufälligen Herrenhauses. Ringsherum gibt es nur gähnende Leere. Die Haustür knarrt im Wind. Auf den zerbrochenen Stufen liegt ein rostiges Brecheisen.",
             "choices": [
                 { "text": "Brecheisen einstecken", "next": "eingang_bewaffnet" },
@@ -24,6 +25,7 @@ let megaHouseStory = {
             ]
         },
         "bibliothek_ruine": {
+            "image": "./img/Backgrounds/pixelHouseBg.jpg",
             "text": "Zwischen umgestürzten Regalen brennt ein unnatürliches, grünes Feuer in einem Kamin. Eine rasselnde Standuhr beginnt plötzlich wild zu schlagen und blockiert den Ausgang. Das Brecheisen in deiner Hand vibriert.",
             "choices": [
                 { "text": "Die Standuhr mit dem Brecheisen zertrümmern", "next": "uhr_zerbricht" },
@@ -45,6 +47,7 @@ let megaHouseStory = {
             ]
         },
         "kuechen_erkundung": {
+            "image": "./img/Backgrounds/pixelHouseBg.jpg",
             "text": "Ein tollwütiger, halb verhungerter Wachhund springt hinter der Küchentheke hervor! Dank des schweren Brecheisens in deiner Hand zieht das Tier jedoch winselnd den Schwanz ein. Er stupst eine lose Bodenplatte im Speisekammerboden an.",
             "choices": [
                 { "text": "Die Bodenplatte anheben", "next": "keller_labyrinth" },
@@ -87,6 +90,7 @@ let megaHouseStory = {
             ]
         },
         "ritualraum_zugang": {
+            "image": "./img/Backgrounds/pixelHouseBg.jpg",
             "text": "Du betrittst ein riesiges, unterirdisches Gewölbe. Auf einem Altar schwebt ein rot glühendes Amulett – das Herz des Hauses. Der Raum verdunkelt sich, als sich ein riesiger Schatten aus Staub und Hass manifestiert und ein Opfer fordert.",
             "choices": [
                 { "text": "Das eiserne Werkzeug opfern", "next": "haus_sieg" },
@@ -133,11 +137,22 @@ let megaHouseStory = {
 };
 
 let currentLvl4Node = "";
+let lastLevelBg = "";
 
 function renderLevel4Node(nodeId) {
     let node = megaHouseStory.nodes[nodeId];
     if (!node) return;
     currentLvl4Node = nodeId;
+    if (level4Container) {
+        if (node.image) lastLevelBg = node.image;
+        if (lastLevelBg) {
+            level4Container.style.backgroundImage = `url("${lastLevelBg}")`;
+            level4Container.style.backgroundSize = "cover";
+            level4Container.style.backgroundPosition = "center";
+        } else {
+            level4Container.style.backgroundImage = "";
+        }
+    }
     let storyImg = level4StoryBoard ? level4StoryBoard.querySelector('img') : null;
 
     if (node.ending) {

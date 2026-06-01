@@ -11,6 +11,7 @@ let castleStory = {
     "start": "schlosstor",
     "nodes": {
         "schlosstor": {
+            "image": "./img/Backgrounds/castleBg.jpg",
             "text": "Du stehst vor den massiven Eichenpforten von Schloss Aethelgard. Ein kalter Wind heult durch die leeren Fensterbögen. Am Boden liegt eine verrostete Laterne.",
             "choices": [
                 { "text": "Laterne anzünden", "next": "innenhof_licht" },
@@ -18,6 +19,7 @@ let castleStory = {
             ]
         },
         "innenhof_licht": {
+            "image": "./img/Backgrounds/castle_story/innenhof_licht.png",
             "text": "Das warme Licht enthüllt Fußspuren im Staub, die zu einer verborgenen Falltür führen. Plötzlich hörst du ein Kettenrasseln aus dem Westturm.",
             "choices": [
                 { "text": "Der Falltür folgen", "next": "kerker_geheim" },
@@ -32,6 +34,7 @@ let castleStory = {
             ]
         },
         "kerker_geheim": {
+            "image": "./img/Backgrounds/castle_story/kerker_geheim.png",
             "text": "Die Falltür führt in eine alte Schatzkammer. In der Ecke funkelt ein silberner Schlüssel, doch der Raum füllt sich langsam mit Wasser.",
             "choices": [
                 { "text": "Schlüssel greifen", "next": "thronsaal_zugang" },
@@ -39,6 +42,7 @@ let castleStory = {
             ]
         },
         "turmaufstieg": {
+            "image": "./img/Backgrounds/castle_story/turmaufstieg.png",
             "text": "Die Stufen sind brüchig. Oben angekommen siehst du eine Hexe, die über einem Kessel braut. Sie bietet dir einen Trank an.",
             "choices": [
                 { "text": "Trank trinken", "next": "verwandlung" },
@@ -46,6 +50,7 @@ let castleStory = {
             ]
         },
         "thronsaal_zugang": {
+            "image": "./img/Backgrounds/castleBg.jpg",
             "text": "Mit dem silbernen Schlüssel öffnest du die Prunkpforte. Auf dem Thron sitzt ein bleicher Geisterkönig. Er fordert ein Rätselduell.",
             "choices": [
                 { "text": "Herausforderung annehmen", "next": "raetsel_sieg" },
@@ -60,6 +65,7 @@ let castleStory = {
             ]
         },
         "geheimgang_befreiung": {
+            "image": "./img/Backgrounds/castle_story/geheimgang_befreiung.png",
             "text": "Der Gefangene zeigt dir ein loses Mauerstück. Du kriechst hindurch und stehst direkt hinter dem Thronsaal.",
             "choices": [
                 { "text": "Krone stehlen", "next": "diebes_ende" },
@@ -99,6 +105,7 @@ let castleStory = {
 
 
 let currentLvl2Node = "";
+let lastLevelBg = "";
 
 function renderLevel2Node(nodeId) {
     let node = castleStory.nodes[nodeId];
@@ -106,6 +113,18 @@ function renderLevel2Node(nodeId) {
     if (!node) return;
     
     currentLvl2Node = nodeId;
+    if (level2Container) {
+        if (node.image) {
+            lastLevelBg = node.image;
+        }
+        if (lastLevelBg) {
+            level2Container.style.backgroundImage = `url("${lastLevelBg}")`;
+            level2Container.style.backgroundSize = "cover";
+            level2Container.style.backgroundPosition = "center";
+        } else {
+            level2Container.style.backgroundImage = "";
+        }
+    }
     let storyImg = level2StoryBoard ? level2StoryBoard.querySelector('img') : null;
 
     if (node.ending) {
