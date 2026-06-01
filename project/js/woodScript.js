@@ -139,16 +139,16 @@ let megaForestStory = {
 };
 
 let currentLvl3Node = "";
-let lastLevelBg = "";
+let lastLevelBg3 = "";
 
 function renderLevel3Node(nodeId) {
     let node = megaForestStory.nodes[nodeId];
     if (!node) return;
     currentLvl3Node = nodeId;
     if (level3Container) {
-        if (node.image) lastLevelBg = node.image;
-        if (lastLevelBg) {
-            level3Container.style.backgroundImage = `url("${lastLevelBg}")`;
+        if (node.image) lastLevelBg3 = node.image;
+        if (lastLevelBg3) {
+            level3Container.style.backgroundImage = `url("${lastLevelBg3}")`;
             level3Container.style.backgroundSize = "cover";
             level3Container.style.backgroundPosition = "center";
         } else {

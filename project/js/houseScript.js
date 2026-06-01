@@ -137,16 +137,16 @@ let megaHouseStory = {
 };
 
 let currentLvl4Node = "";
-let lastLevelBg = "";
+let lastLevelBg4 = "";
 
 function renderLevel4Node(nodeId) {
     let node = megaHouseStory.nodes[nodeId];
     if (!node) return;
     currentLvl4Node = nodeId;
     if (level4Container) {
-        if (node.image) lastLevelBg = node.image;
-        if (lastLevelBg) {
-            level4Container.style.backgroundImage = `url("${lastLevelBg}")`;
+        if (node.image) lastLevelBg4 = node.image;
+        if (lastLevelBg4) {
+            level4Container.style.backgroundImage = `url("${lastLevelBg4}")`;
             level4Container.style.backgroundSize = "cover";
             level4Container.style.backgroundPosition = "center";
         } else {

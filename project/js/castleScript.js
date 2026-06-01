@@ -105,7 +105,7 @@ let castleStory = {
 
 
 let currentLvl2Node = "";
-let lastLevelBg = "";
+let lastLevelBg2 = "";
 
 function renderLevel2Node(nodeId) {
     let node = castleStory.nodes[nodeId];
@@ -115,10 +115,10 @@ function renderLevel2Node(nodeId) {
     currentLvl2Node = nodeId;
     if (level2Container) {
         if (node.image) {
-            lastLevelBg = node.image;
+            lastLevelBg2 = node.image;
         }
-        if (lastLevelBg) {
-            level2Container.style.backgroundImage = `url("${lastLevelBg}")`;
+        if (lastLevelBg2) {
+            level2Container.style.backgroundImage = `url("${lastLevelBg2}")`;
             level2Container.style.backgroundSize = "cover";
             level2Container.style.backgroundPosition = "center";
         } else {
