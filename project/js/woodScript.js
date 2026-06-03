@@ -206,12 +206,14 @@ function openLevel3() {
     if (levelPick) levelPick.style.display = "none";
     if (level3Container) level3Container.style.display = "flex";
     renderLevel3Node(megaForestStory.start);
+    if (typeof playLevelAudio === 'function') playLevelAudio('./js/audio/forest.mp3');
 }
 
 function closeLevel3() {
     if (level3Container) level3Container.style.display = "none";
     const levelPick = document.getElementById('levelPickContainer');
     if (levelPick) levelPick.style.display = "flex";
+    if (typeof stopLevelAudio === 'function') stopLevelAudio();
 }
 
 if (level3Decision1) {

@@ -204,12 +204,14 @@ function openLevel4() {
     if (levelPick) levelPick.style.display = "none";
     if (level4Container) level4Container.style.display = "flex";
     renderLevel4Node(megaHouseStory.start);
+    if (typeof playLevelAudio === 'function') playLevelAudio('./js/audio/hountedhouse.mp3');
 }
 
 function closeLevel4() {
     if (level4Container) level4Container.style.display = "none";
     const levelPick = document.getElementById('levelPickContainer');
     if (levelPick) levelPick.style.display = "flex";
+    if (typeof stopLevelAudio === 'function') stopLevelAudio();
 }
 
 if (level4Decision1) {

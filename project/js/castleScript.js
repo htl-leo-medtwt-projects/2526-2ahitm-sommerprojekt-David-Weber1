@@ -175,11 +175,13 @@ function openLevel2() {
     if (levelPickContainerLvl2) levelPickContainerLvl2.style.display = "none";
     if (level2Container) level2Container.style.display = "flex";
     renderLevel2Node(castleStory.start);
+    if (typeof playLevelAudio === 'function') playLevelAudio('./js/audio/castle.mp3');
 }
 
 function closeLevel2() {
     if (level2Container) level2Container.style.display = "none";
     if (levelPickContainerLvl2) levelPickContainerLvl2.style.display = "flex";
+    if (typeof stopLevelAudio === 'function') stopLevelAudio();
 }
 
 if (level2Decision1) {

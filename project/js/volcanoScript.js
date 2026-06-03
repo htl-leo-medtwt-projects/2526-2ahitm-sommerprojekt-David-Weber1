@@ -204,11 +204,13 @@ function openLevel1() {
     document.getElementById('levelPickContainer').style.display = "none";
     level1Container.style.display = "flex";
     renderLevel1Node(volcanoStory.start);
+    if (typeof playLevelAudio === 'function') playLevelAudio('./js/audio/Lava_Brodeln.mp3');
 }
 
 function closeLevel1() {
     level1Container.style.display = "none";
     document.getElementById('levelPickContainer').style.display = "flex";
+    if (typeof stopLevelAudio === 'function') stopLevelAudio();
 }
 
 level1Decision1.addEventListener("click", () => {

@@ -1,6 +1,34 @@
 const audio = new Audio('./js/audio/mainTheme.mp3');
 const audioBox = document.getElementById('audioBox');
 audio.loop = true;
+let levelAudio = null;
+
+function playLevelAudio(src) {
+    try {
+        if (levelAudio) {
+            levelAudio.pause();
+            levelAudio = null;
+        }
+        if (!audio.paused) audio.pause();
+        levelAudio = new Audio(src);
+        levelAudio.loop = true;
+        levelAudio.play();
+    } catch (e) {
+        console.warn('playLevelAudio error', e);
+    }
+}
+
+function stopLevelAudio() {
+    try {
+        if (levelAudio) {
+            levelAudio.pause();
+            levelAudio = null;
+        }
+        if (audio.paused) audio.play();
+    } catch (e) {
+        console.warn('stopLevelAudio error', e);
+    }
+}
 
 function closeAudioBox() {
     if (!audioBox) return;
@@ -13,18 +41,25 @@ function closeAudioBox() {
     }
 }
 function startAudio() {
-    audio.play();
+    if (levelAudio) {
+        if (levelAudio.paused) levelAudio.play();
+    } else {
+        audio.play();
+    }
     closeAudioBox();
 }
 function declineAudio() {
+    if (levelAudio) {
+        levelAudio.pause();
+    }
     audio.pause();
     closeAudioBox();
 }
 function toggleAudio() {
-    if (audio.paused) {
-        audio.play();
+    if (levelAudio) {
+        if (levelAudio.paused) levelAudio.play(); else levelAudio.pause();
     } else {
-        audio.pause();
+        if (audio.paused) audio.play(); else audio.pause();
     }
 }
 
