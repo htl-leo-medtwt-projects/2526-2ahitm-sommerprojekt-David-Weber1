@@ -203,19 +203,37 @@ function renderLevel3Node(nodeId) {
 
 function openLevel3() {
     const levelPick = document.getElementById('levelPickContainer');
-    if (levelPick) levelPick.style.display = "none";
-    if (level3Container) level3Container.style.display = "flex";
+    
+    if (levelPick) {
+        levelPick.style.display = "none";
+    }
+    
+    if (level3Container) {
+        level3Container.style.display = "flex";
+    }
+    
     renderLevel3Node(megaForestStory.start);
-    if (typeof playLevelAudio === 'function') playLevelAudio('./js/audio/forest.mp3');
+    
+    
+    playLevelAudio('./js/audio/forest.mp3');
+    
 }
 
 function closeLevel3() {
-    if (level3Container) level3Container.style.display = "none";
+    if (level3Container) {
+        level3Container.style.display = "none";
+    }
+    
     const levelPick = document.getElementById('levelPickContainer');
-    if (levelPick) levelPick.style.display = "flex";
-    if (typeof stopLevelAudio === 'function') stopLevelAudio();
+    
+    if (levelPick) {
+        levelPick.style.display = "flex";
+    }
+    
+    if (typeof stopLevelAudio === 'function') {
+        stopLevelAudio();
+    }
 }
-
 if (level3Decision1) {
     level3Decision1.addEventListener("click", () => {
         if (level3Container && level3Container.style.display === "flex" && currentLvl3Node !== "") {
